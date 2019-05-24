@@ -22,12 +22,13 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // Set public folder
+app.use(express.static(path.join(__dirname, 'views')));
 
 // Body parser middleware
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 //parse application/json
-app.use(bodyParser.json);
+app.use(bodyParser.json());
 
 //Express session middleware
 app.use(session({
@@ -47,9 +48,9 @@ app.use(function (req, res, next) {
 //Express validator
 app.use(expressValidator({
   errorFormatter: function(param, msg, value) {
-      var namespace = param.split('.')
-      , root    = namespace.shift()
-      , formParam = root;
+    var namespace = param.split('.'),
+        root = namespace.shift(),
+        formParam = root;
 
     while(namespace.length) {
       formParam += '[' + namespace.shift() + ']';
