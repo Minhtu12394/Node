@@ -18,6 +18,6 @@ var PageSchema = mongoose.Schema({
     type: Number
   }
 
-})
+});
 
 var Page = module.exports = mongoose.model('Page', PageSchema);

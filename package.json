@@ -12,10 +12,11 @@
     "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
     "ejs": "^2.6.1",
+    "export": "^0.1.337",
     "express": "^4.17.0",
     "express-messages": "^1.0.1",
     "express-session": "^1.16.1",
     "express-validator": "^5.3.1",
-    "mongoose": "^5.5.10"
+    "mongoose": "^5.5.11"
   }
 }

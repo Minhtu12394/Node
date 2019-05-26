@@ -1,5 +1,27 @@
-<%- include ('../_layouts/header/admin_header' %>
+<%- include('../_layouts/admin_header') %>
 
-<h1>Hello World!</h1>
+<h2 class="page-title">Add a page</h2>
+<a href="/admin/pages" class="btn btn-primary">Back to all page</a>
+<br><br>
 
-<%- include ('../_layouts/header/admin_footer' %>
+<form method="post" action="admin/pages/add_page">
+  <div class="form-group">
+    <label for="">Title</label>
+    <input type="text" class="form-control" name="title" value="<%= title %>" placeholder="Title">
+  </div>
+
+  <div class="form-group">
+    <label for="">Slug</label>
+    <input type="text" class="form-control" name="slug" value="<%= slug %>" placeholder="Slug">
+  </div>
+
+  <div class="form-group">
+    <label for="">Content</label>
+    <textarea name="content" class="form-control" value="<%= content %>" placeholder="Content">
+    </textarea>
+  </div>
+
+  <button class="btn btn-default">Submit</button>
+</form>
+
+<%- include('../_layouts/admin_footer') %>

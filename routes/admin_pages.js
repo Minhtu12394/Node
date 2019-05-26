@@ -7,9 +7,7 @@ var router = express.Router();
 */
 
 router.get('/', function(req, res) {
-  res.render('index', {
-    title: 'Admin'
-  });
+  res.send('admin area')
 });
 
 /*
