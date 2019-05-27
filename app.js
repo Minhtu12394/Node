@@ -5,7 +5,7 @@ var config = require('./config/database');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var expressValidator = require('express-validator');
-
+var flash = require('connect-flash');
 //conect to db
 mongoose.connect(config.database, {useNewUrlParser: true});
 var db = mongoose.connection;
@@ -22,14 +22,18 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // Set public folder
-app.use(express.static(path.join(__dirname, 'views')));
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Set global errors variable
+
+app.locals.errors = null;
 
 // Body parser middleware
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 //parse application/json
 app.use(bodyParser.json());
-
+app.use(flash());
 //Express session middleware
 app.use(session({
   secret: 'keyboard cat',
@@ -70,7 +74,7 @@ app.use('/admin/pages', admin_pages);
 app.use('/', pages);
 
 // Start the server
-var port = 3001;
+var port = 8080;
 app.listen(port, function(){
   console.log('Server started on port ' + port);
 });

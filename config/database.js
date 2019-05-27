@@ -1,3 +1,3 @@
 module.exports = {
-  database: 'mongodb://localhost/node'
+  database: 'mongodb://localhost/cmscart'
 }
