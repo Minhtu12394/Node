@@ -10,20 +10,24 @@ var Page = require('../models/page');
 * GET pages index
 */
 
-router.get('/', function(req, res) {
-  res.send('admin area');
+router.get('/', function(req, res){
+  Page.find({}).sort({sorting: 1}).exec(function (err, pages){
+    res.render('admin/pages', {
+      pages: pages
+    });
+  });
 });
 
 /*
  * GET add page
  */
 
-router.get('/add_page', function(req, res) {
+router.get('/add_page', function(req, res){
   var title = "";
   var slug = "";
   var content = "";
 
-  res.render('admin/add_page',{
+  res.render('admin/add_page', {
     title: title,
     slug: slug,
     content: content
@@ -36,7 +40,7 @@ router.get('/add_page', function(req, res) {
  */
 
 
-router.post('/add_page', function(req, res) {
+router.post('/add_page', function(req, res){
 
   req.checkBody('title', 'Title must have value').notEmpty();
   req.checkBody('content', 'Content must have value').notEmpty();
@@ -50,30 +54,30 @@ router.post('/add_page', function(req, res) {
 
   if (errors){
     console.log('errors');
-    res.render('admin/add_page',{
+    res.render('admin/add_page', {
       errors: errors,
       title: title,
       slug: slug,
       content: content
     });
-  } else {
-    Page.findOne({slug: slug}, function(err, page) {
-      if (page) {
+  } else{
+    Page.findOne({slug: slug}, function(err, page){
+      if (page){
         req.flash('danger', 'Page slug exists, choose another.');
         res.render('admin/add_page', {
           title: title,
           slug: slug,
           content: content
         });
-      } else {
+      } else{
         var page = new Page({
           title: title,
           slug: slug,
           content: content,
-          sorting: 0
+          sorting: 100
         });
 
-        page.save(function(err) {
+        page.save(function(err){
           if (err)
             return console.log(err);
           req.flash('success', 'Page added!');
